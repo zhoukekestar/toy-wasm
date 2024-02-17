@@ -1,21 +1,19 @@
-import { WasmModule, WasmBuffer, instantiate } from './wasm.js'
-import { readFileSync } from 'fs'
+import { WasmModule, WasmBuffer, instantiate } from './wasm.js';
+import { readFileSync } from 'fs';
 
-const code = readFileSync(
-  new URL('./demo/add.wasm', import.meta.url)
-)
+const code = readFileSync(new URL('./demo/add.wasm', import.meta.url));
 
 function toArrayBuffer (buffer) {
-  const arrayBuffer = new ArrayBuffer(buffer.length)
-  const view = new Uint8Array(arrayBuffer)
+  const arrayBuffer = new ArrayBuffer(buffer.length);
+  const view = new Uint8Array(arrayBuffer);
   for (let i = 0; i < buffer.length; ++i) {
-    view[i] = buffer[i]
+    view[i] = buffer[i];
   }
-  return arrayBuffer
+  return arrayBuffer;
 }
 
-const instance = instantiate({ buffer: toArrayBuffer(code) })
+const instance = instantiate({ buffer: toArrayBuffer(code) });
 
-const result = instance.exports.add(42, 28)
+const result = instance.exports.add(42, 28);
 
-console.log(`result: ${result}`)
+console.log(`result: ${result}`);
