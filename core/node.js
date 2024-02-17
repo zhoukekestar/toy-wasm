@@ -59,8 +59,12 @@ export class ModuleNode {
         return null;
     }
     load(buffer) {
+        // https://webassembly.github.io/spec/core/binary/modules.html#binary-module
+        // 固定的魔数和版本号
         this.magic = buffer.readBytes(4);
         this.version = buffer.readBytes(4);
+
+        // 加载 sections
         while (true) {
             if (buffer.eof)
                 break;
