@@ -46,6 +46,11 @@ export class Instance {
     }
     return this.#exports;
   }
+
+  get context() {
+    return this.#context;
+  }
+  
   constructor (module, importObject) {
     this.#module = module;
     this.#importObject = importObject;
@@ -189,9 +194,13 @@ class WasmFunction {
     }
   }
   invoke (context, ...args) {
-    // args check
+    // 入参
     const params = [...args];
+
+    // 函数签名参数
     const paramTypes = this.#funcType.paramType.valTypes;
+
+    // 此处如果入参少于签名个数，则从上下文中获取并加入
     for (let i = 0; i < paramTypes.length - args.length; i++) {
       const param = context.stack.readI32(); // TODO: valtype
       params.push(param);

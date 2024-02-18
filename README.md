@@ -20,11 +20,22 @@ sections: (https://webassembly.github.io/spec/core/binary/modules.html#sections)
     
     section type: 01  TypeSction 类型
     section size: 07  (Unsigned_LEB128 https://en.wikipedia.org/wiki/LEB128#Unsigned_LEB128) 
-    section content: 0160 027f 7f01 7f
+    section content: 
+        vector number: 01
+            function types: 60 (函数类型，固定值)
+                result type input: 
+                    result type vector number: 02
+                        number type: 7f (i32)
+                        number type: 7f (i32)
+                result type output: 
+                    result type vector number: 01 
+                        number type: 7f (i32)
 
     section type: 03 FunctionSection 函数
     section size: 02
-    section content: 01 00
+    section content: 
+        vector number: 01 
+            type index: 00
     
     section type: 07 ExportSection 导出
     section size: 07
@@ -32,8 +43,9 @@ sections: (https://webassembly.github.io/spec/core/binary/modules.html#sections)
         vector number: 01 (向量长度)
             export name: 03 (字符串长度)
                 naem: 61 6464 (字符串 add)
-            exoprt desc: 00  (funcidx)
-                exoprt function index: 00 
+            exoprt desc: 
+                export desc tag: 00 (funcidx)
+                    exoprt function index: 00
     
     section type: 0a CodeSection 代码
     section size: 09

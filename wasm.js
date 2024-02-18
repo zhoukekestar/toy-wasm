@@ -1,5 +1,3 @@
-export { ModuleNode as WasmModule } from './core/node.js';
-export { Buffer as WasmBuffer } from './core/buffer.js';
 import { ModuleNode } from './core/node.js';
 import { Buffer } from './core/buffer.js';
 
