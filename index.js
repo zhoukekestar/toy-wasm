@@ -1,9 +1,6 @@
 import { instantiate } from './wasm.js';
-import { readFileSync } from 'fs';
 
-// const code = readFileSync(new URL('./demo/add.wasm', import.meta.url));
-// const code = readFileSync(new URL('./demo/start.wasm', import.meta.url));
-const code = readFileSync(new URL('./demo/1plus1.wasm', import.meta.url));
+const code = new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 4, 1, 96, 0, 0, 3, 2, 1, 0, 8, 1, 0, 10, 10, 1, 8, 0, 65, 1, 65, 1, 106, 15, 11])
 
 function toArrayBuffer (buffer) {
   const arrayBuffer = new ArrayBuffer(buffer.length);
@@ -13,20 +10,6 @@ function toArrayBuffer (buffer) {
   }
   return arrayBuffer;
 }
-
-// start 测试
-// const instance = instantiate({ buffer: toArrayBuffer(code) }, {
-//   env: {
-//     print: function(n) {
-//       console.log('env.print', n)
-//     }
-//   }
-// });
-
-// add 测试
-// const instance = instantiate({ buffer: toArrayBuffer(code) });
-// const result = instance.exports.add(42, 28);
-// console.log(`result: ${result}`);
 
 // 1 + 1 测试
 const instance = instantiate({ buffer: toArrayBuffer(code) })
